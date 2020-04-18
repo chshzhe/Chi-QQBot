@@ -1,7 +1,7 @@
 import random
 from time import sleep
 
-from nonebot import on_command, CommandSession, on_natural_language, NLPSession, NLPResult
+from nonebot import on_command, CommandSession, on_natural_language, NLPSession, NLPResult, scheduler
 
 import config
 from plugins.sell_vegetable.corpus import Corpus
@@ -10,6 +10,11 @@ corpus = Corpus()
 corpus.update()
 
 question_words = ["为什么", "怎么", "如何", "怎样", "教我"]
+
+
+@scheduler.scheduled_job('interval', minutes=10)
+async def update_corpus():
+    corpus.update()
 
 
 @on_command('sell', aliases=('卖弱',))
