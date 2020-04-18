@@ -1,5 +1,9 @@
+import random
+from time import sleep
+
 from nonebot import on_command, CommandSession, on_natural_language, NLPSession, NLPResult
 
+import config
 from plugins.sell_vegetable.corpus import Corpus
 
 corpus = Corpus()
@@ -15,9 +19,13 @@ async def cmd_sell(session: CommandSession):
 
 @on_natural_language(corpus.trigger, only_to_me=False)
 async def auto_sell(session: NLPSession):
+    if config.ENABLE_RANDOM_DELAY:
+        sleep(random.random() * config.MAX_DELAY_TIME)
     return NLPResult(80.0, ('sell',), None)
 
 
 @on_natural_language(question_words)
 async def auto_refuse(session: NLPSession):
+    if config.ENABLE_RANDOM_DELAY:
+        sleep(random.random() * config.MAX_DELAY_TIME)
     await session.send(corpus.get_rnd_refuse())
