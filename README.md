@@ -1,6 +1,6 @@
- # Chi-Bot
+ # Chi-QQBot
 
-Chi-Bot是使用[NoneBot](https://github.com/nonebot/nonebot)开发的一个QQ机器人
+Chi-QQBot是使用[NoneBot](https://github.com/nonebot/nonebot)开发的迟先生模拟QQ机器人
  
  ## 如何使用
  
