@@ -4,15 +4,14 @@ Chi-QQBot是使用[NoneBot](https://github.com/nonebot/nonebot)开发的迟先�
  
  ## 如何使用
  
- 1. 下载[酷Q](https://cqp.cc/b/news)
- 2. 下载并安装[CoolQ HTTP API](https://github.com/richardchien/coolq-http-api)插件。配置教程：(https://richardchien.gitee.io/coolq-http-api/docs/)
- 3. 创建Python（>=3.7）虚拟环境
+ 1. 下载并配置[go-cqhttp](https://github.com/Mrs4s/go-cqhttp)
+ 2. 创建Python（>=3.7）虚拟环境
      ```shell script
       virtualenv venv
       source venv/bin/activate
     ```
- 4. 安装依赖
+ 3. 安装依赖
     ```shell script
     pip install -r requirements.txt
     ```
- 5. 登录酷Q程序，启用CQ插件，运行`bot.py`
+ 4. 运行`go-cqhttp`，运行`bot.py`

@@ -1,2 +1,4 @@
-requests
-nonebot[scheduler]==1.5.0
+httpx
+nonebot[scheduler]
+ujson
+msgpack
