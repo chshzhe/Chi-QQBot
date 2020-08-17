@@ -1,4 +1,4 @@
-/data
+data
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
@@ -132,3 +132,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+.idea/

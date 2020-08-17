@@ -1,4 +1,5 @@
 from nonebot import on_command, CommandSession, on_natural_language, NLPSession, NLPResult, scheduler
+from nonebot.permission import SUPERUSER, PRIVATE
 
 from plugins.sell_vegetable.corpus import Corpus
 
@@ -16,6 +17,12 @@ async def update_corpus():
 @on_command('sell', aliases=('卖弱',))
 async def cmd_sell(session: CommandSession):
     await session.send(corpus.get_rnd_common())
+
+
+@on_command('update', permission=SUPERUSER | PRIVATE, only_to_me=True)
+async def cmd_update(session: CommandSession):
+    await corpus.update()
+    await session.send('手动更新成功')
 
 
 @on_natural_language(corpus.trigger, only_to_me=True)
