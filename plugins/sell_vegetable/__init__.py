@@ -3,6 +3,9 @@ from nonebot.permission import SUPERUSER, PRIVATE
 
 from plugins.sell_vegetable.corpus import Corpus
 
+__plugin_name__ = '卖弱'
+__plugin_usage__ = r"""at我并输入卖弱"""
+
 corpus = Corpus()
 corpus.load_from_dir('data')
 
