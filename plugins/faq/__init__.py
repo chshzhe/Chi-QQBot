@@ -2,7 +2,13 @@ import json
 from typing import List
 
 from nonebot import on_command, CommandSession
-from nonebot.permission import SUPERUSER
+
+__plugin_name__ = '自助答疑'
+__plugin_usage__ = r"""自助答疑
+
+分流 电院/工试 [排名]
+问 [内容]
+"""
 
 ep = [('电子信息与电气工程学院', 670), ('机械与动力工程学院', 880), ('船舶海洋与建筑工程学院', 1180),
       ('材料科学与工程学院', 1080), ('生物医学工程学院', 930), ('海洋学院', 1150), ('航空航天学院', 1100)]
@@ -66,16 +72,34 @@ async def _(session: CommandSession):
         await session.send(ans)
 
 
-@on_command('add', aliases=('添加',), only_to_me=True, permission=SUPERUSER)
+@on_command('add', aliases=('添加',), only_to_me=True)
 async def _(session: CommandSession):
-    question, ans = session.current_arg_text.strip().split(' ')
+    question, ans = session.current_arg_text.strip().split('#')
     faq[question] = ans
     with open('data/faq.json', mode='w', encoding='utf-8') as f:
         json.dump(faq, f, ensure_ascii=False, indent=4)
     await session.send('已添加到问题库')
 
 
-@on_command('load_faq', only_to_me=True, permission=SUPERUSER)
+@on_command('delete', aliases=('删除',), only_to_me=True)
+async def _(session: CommandSession):
+    question = session.current_arg_text.strip()
+    if faq.get(question):
+        del faq[question]
+    with open('data/faq.json', mode='w', encoding='utf-8') as f:
+        json.dump(faq, f, ensure_ascii=False, indent=4)
+    await session.send(f'已删除{question}')
+
+
+@on_command('load_faq', only_to_me=True)
 async def _(session: CommandSession):
     load_faq()
     await session.send('已重新加载问题库')
+
+
+@on_command('all', aliases=('所有问题',), only_to_me=True)
+async def _(session: CommandSession):
+    msg = '当前支持提问的内容有：\n\n'
+    for item in faq.keys():
+        msg = msg + item + '\n'
+    await session.send(msg)
